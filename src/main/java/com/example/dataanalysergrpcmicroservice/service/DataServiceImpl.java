@@ -5,7 +5,9 @@ import com.example.dataanalysergrpcmicroservice.repository.DataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
 import java.util.List;
 
 @Service
@@ -21,6 +23,7 @@ import java.util.List;
     }
 
     @Override
+    @Transactional
     public List<Data> getWithBatch(long batchSize) {
         List<Data> data = dataRepository.findAllWithOffset(batchSize);
         if(data.size() > 0) {
